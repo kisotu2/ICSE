@@ -6,6 +6,7 @@ class DatabaseConnection{
             die("<h1>Database connection failed</h1>");
 
         }
+       return $this-> conn = $conn;
     }
 }
 ?>

@@ -1,4 +1,5 @@
-
+<html>
+    <link rel="stylesheet" href="styles.css">
 <div class = "main-container">
     <div class="container">
         <div class="row justify-content-center">
@@ -37,3 +38,4 @@
         </div>
     </div>
 </div>
+</html>

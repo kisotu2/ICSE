@@ -1,4 +1,73 @@
-body{
-    background-color: beige;
-    
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Navigation Bar */
+.nav {
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+}
+
+.logo .name {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* Menu Content */
+.content {
+    list-style-type: none;
+    display: flex;
+}
+
+.content .data {
+    margin-left: 20px;
+}
+
+.content .data a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+    transition: background 0.3s ease;
+}
+
+.content .data a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.active a {
+    background-color: #ff4757;
+    border-radius: 5px;
+}
+
+/* Ensure the rest of the content starts below the nav */
+body {
+    padding-top: 60px;
 }

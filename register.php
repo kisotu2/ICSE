@@ -1,4 +1,7 @@
 <html>
+    <?php 
+    include('navbar.php');
+    ?>
     <link rel="stylesheet" href="styles.css">
 <div class = "main-container">
     <div class="container">
@@ -9,6 +12,7 @@
                         <h4>Register</h4>
                     </div>
                     <div class="card-body">
+                        <form >-[]
                         <div class="mb-3">
                             <label for="">First Name</label>
                             <input type="text" name="fname" class="form-control">

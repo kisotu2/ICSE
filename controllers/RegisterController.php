@@ -1,16 +1,19 @@
 <?php 
+session_start();
 include('app.php');
 class RegisterController{
     public function __construct() {
         $db = new DatabaseConnection;
         $this ->conn = $db->conn;
     }
+    //inserting data into the user table
     public function registration($fname,$email,$username,$password){
         $register_query = "INSERT INTO users(fullname,email,username,password,updated) VALUES ('$fname','$email','$username','$password') ";
         $result = $this->conn->query($register_query);
         return $result;
 
     }
+    //check if the user exist
     public function isUserExists($email){
         $checkUser = "SELECT email from users WHERE email= '$email' LIMIT 1";
         $result = $this->conn->query ($checkUser);
@@ -22,6 +25,7 @@ class RegisterController{
         }
 
     }
+    //confirmation of password
     public function confirmPassword($password,$confirm_password){
         if($password==$confirm_password){
             return true;
@@ -29,6 +33,13 @@ class RegisterController{
         else {
             return false;
         }
+    }
+    public function redirect($message,$page){
+        $redirectTo = $page;
+        $_SESSION ['message'] = "message";
+        header ("Location : $page");
+        exit(0);
+
     }
 
 }

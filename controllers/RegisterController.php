@@ -5,8 +5,8 @@ class RegisterController{
         $db = new DatabaseConnection;
         $this ->conn = $db->conn;
     }
-    public function registration($fname,$email,$username,$password,$confirm_password){
-        $register_query = "INSERT INTO users(fullname,email,username,password,updated) VALUES ('$fname','$email','$username','$password','$confirm_password') ";
+    public function registration($fname,$email,$username,$password){
+        $register_query = "INSERT INTO users(fullname,email,username,password,updated) VALUES ('$fname','$email','$username','$password') ";
 
     }
 

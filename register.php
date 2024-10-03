@@ -1,6 +1,7 @@
 <html>
     <?php 
     include('navbar.php');
+    include('authentication.php');
     ?>
     <link rel="stylesheet" href="styles.css">
 <div class = "main-container">
@@ -12,7 +13,7 @@
                         <h4>Register</h4>
                     </div>
                     <div class="card-body">
-                        <form >-[]
+                        <form method = "post" action = "app.php">
                         <div class="mb-3">
                             <label for="">First Name</label>
                             <input type="text" name="fname" class="form-control">
@@ -37,6 +38,7 @@
                             <button type="submit" name="register_btn" class="btn btn">Submit</button>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

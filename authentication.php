@@ -1,6 +1,6 @@
 <?php
-include('app.php');
-include_once('RegisterController.php');
+include('codes/app.php');
+include_once('controllers/RegisterController.php');
 
 if(isset($_POST['register_btn'])){
     $fname = validateInput($db->conn,$_POST['fname']);

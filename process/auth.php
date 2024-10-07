@@ -13,7 +13,7 @@ class auth{
             $errors = array();
 
             $fullname = $_SESSION["fullname"] = $conn->escape_values(ucwords(strtolower($_POST["fullname"])));
-            $email_address = $_SESSION["email_address"] = $conn->escape_values(strtolower($_POST["email_address"]));
+            $email_address = $_SESSION["email"] = $conn->escape_values(strtolower($_POST["email"]));
             $username = $_SESSION["username"] = $conn->escape_values(strtolower($_POST["username"]));
 
 // Implement input validation and error handling

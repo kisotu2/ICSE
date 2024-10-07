@@ -26,9 +26,10 @@ $ObjSendMail = new SendMail();
     $ObjMenus = new menus();
     $ObjContents = new contents();
     $Objforms = new forms();
-    $conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
+    $conn = new dbConnection(DB_TYPE, HOST_NAME, DB_PORT, HOST_USER, HOST_PASS, DB_NAME);
 
 // Create process instances
 
 $ObjAuth = new auth();
 $ObjAuth->signup($conn, $ObjGlob, $ObjSendMail, $lang, $conf);
+$ObjAuth->verify_code($conn, $ObjGlob, $ObjSendMail, $lang, $conf);

@@ -1,5 +1,5 @@
 <?php
-include('codes/app.php');
+include('include/app.php');
 include_once('controllers/RegisterController.php');
 
 if(isset($_POST['register_btn'])){

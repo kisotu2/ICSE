@@ -8,7 +8,7 @@
     //load the composer autoload
     require '../autoload.php';
 
-    iff(isset($_POST["register"]))
+    if(isset($_POST["register"]))
     {
         $name = $_POST ["fname"];
         $email = $_POST ["email"];
@@ -59,13 +59,13 @@
             $mail->send();
 
             //echo 'message has been sent'
-            $encrypted_password = password_has($password,PASSWORD_DEFAULT);
+            $encrypted_password = password_hash($password,PASSWORD_DEFAULT);
 
 
 
 
 
-         }
+        }
 
     };
 

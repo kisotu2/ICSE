@@ -1,5 +1,5 @@
 <?php
-require 'PHPMailerAutoload.php';
+require 'PHPMailer/PHPMailerAutoload.php';
 
 $mail = new PHPMailer;
 
@@ -11,7 +11,7 @@ $mail->SMTPAuth = true;                               // Enable SMTP authenticat
 $mail->Username = 'kisotusamuel1@gmail.com';                 // SMTP username
 $mail->Password = 'grcfyjpflbfcqpsd';                           // SMTP password
 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 465;                                    // TCP port to connect to
+$mail->Port = 587;                                    // TCP port to connect to
 
 $mail->setFrom('kisotusamuel1@gmail.com', 'Samwel Kisotu');
 $mail->addAddress('kisotu.samuel@strathmore.edu', ' Lemayian');     // Add a recipient

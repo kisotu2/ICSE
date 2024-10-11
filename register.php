@@ -1,82 +1,85 @@
 <html>
-    <?php
-    //importing the PHPMailer classes
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\SMTP;
-    use PHPMailer\PHPMailer\Exception;
+<?php
+// Importing the PHPMailer classes
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-    //load the composer autoload
-    require '../autoload.php';
+// Load the composer autoload
+require '../autoload.php';
 
-    if(isset($_POST["register"]))
-    {
-        $name = $_POST ["fname"];
-        $email = $_POST ["email"];
-        $username = $_POST ["user_name"];
-        $password = $_POST ["password"];
-        $confirm_password = $_POST ["confirm_password"];
+if(isset($_POST["register"]))
+{
+    $name = $_POST["fname"];
+    $email = $_POST["email"];
+    $username = $_POST["user_name"];
+    $password = $_POST["password"];
+    $confirm_password = $_POST["confirm_password"];
 
-        // true enables the exemptions
-        $mail = new PHPMailer(true);
-         try{
-            //enable verbose debug output 
-            $mail -> SMTPDebug = 0; // SMTP ::DEBUG_SERVER;
+    // Check if passwords match
+    if ($password !== $confirm_password) {
+        echo "Passwords do not match!";
+        exit();
+    }
 
-            //Send using SMTP
-            $mail->isSMTP();
+    // True enables the exceptions for debugging
+    $mail = new PHPMailer(true);
+    try {
+        // Enable verbose debug output (0 for no debug output)
+        $mail->SMTPDebug = 0; // SMTP::DEBUG_SERVER;
 
-            //set the SMTP server to send through 
-            $mail->Host = 'smtp.gmail.com';
+        // Send using SMTP
+        $mail->isSMTP();
 
-            //enable the SMTP authentication
-            $mail ->SMTPAuth = true;
+        // Set the SMTP server to send through
+        $mail->Host = 'smtp.gmail.com';
 
-            //SMTP username
-            $mail ->Username = 'kisotusamuel1@gmail.com';
+        // Enable SMTP authentication
+        $mail->SMTPAuth = true;
 
-            //SMTP password
-            $mail-> Password = 'grcfyjpflbfcqpsd';
+        // SMTP username
+        $mail->Username = 'kisotusamuel1@gmail.com';
 
-            //Enable tls encryption
-            $mail -> SMTPSecure = PHPMailer :: ENCRYPTION_STARTTLS;
+        // SMTP password
+        $mail->Password = 'grcfyjpflbfcqpsd';
 
-            //TCP port to connect to use, use 465 for `PHPMailer :: ENCRYPTION_STARTTLS` above
-            $mail->PORT = 587;
+        // Enable TLS encryption
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
-            //recipients
-            $mail->setFrom ('kisotusamuel1@gmail.com', 'Samuel Kisotu');
+        // TCP port to connect to (587 for TLS encryption)
+        $mail->Port = 587;
 
-            //add a recipient 
-            $mail->addAddress($email,$name);
+        // Recipients
+        $mail->setFrom('kisotusamuel1@gmail.com', 'Samuel Kisotu');
 
-            //set email format to html
-            $mail->isHTML(true);
+        // Add a recipient
+        $mail->addAddress($email, $name);
 
-            $verification_code = substr(number_format(time() * rand(),0,'',''),0,6);
-            $mail->Subject = 'Email Verification';
-            $mail-> Body = '<p>Your Verification code is: <b style = "font-size : 30px;"> ' .
-            $verification_code . '</b></p>';
-            $mail->send();
+        // Set email format to HTML
+        $mail->isHTML(true);
 
-            //echo 'message has been sent'
-            $encrypted_password = password_hash($password,PASSWORD_DEFAULT);
+        // Generate verification code
+        $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+        $mail->Subject = 'Email Verification';
+        $mail->Body = '<p>Your verification code is: <b style="font-size: 30px;">' . $verification_code . '</b></p>';
 
+        // Send the email
+        $mail->send();
 
+        // Encrypt the password
+        $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
 
+        
+    }
+}
 
+// Include additional files
+include('navbar.php');
+include('authentication.php');
+?>
+<link rel="stylesheet" href="styles.css">
 
-        }
-
-    };
-
-    //
-
-    include('navbar.php');
-    include('authentication.php');
-
-    ?>
-    <link rel="stylesheet" href="styles.css">
-<div class = "main-container">
+<div class="main-container">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -85,32 +88,32 @@
                         <h4>Register</h4>
                     </div>
                     <div class="card-body">
-                        <form method = "post" action = "../include/app.php">
-                        <div class="mb-3">
-                            <label for="">First Name</label>
-                            <input type="text" name="fname" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="">Email Address</label>
-                            <input type="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="">User Name</label>
-                            <input type="text" name="user_name" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="">Password</label>
-                            <input type="password" name="password" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="">Confirm Password</label>
-                            <input type="text" name="confirm_password" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <button type="submit" name="register" class="btn btn">Submit</button>
-                        </div>
+                        <form method="post" action="../include/app.php">
+                            <div class="mb-3">
+                                <label for="">First Name</label>
+                                <input type="text" name="fname" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Email Address</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">User Name</label>
+                                <input type="text" name="user_name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Password</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Confirm Password</label>
+                                <input type="password" name="confirm_password" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" name="register" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>

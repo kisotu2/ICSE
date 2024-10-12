@@ -1,6 +1,6 @@
 <?php
 // Import the DatabaseConnection class and PHPMailer
-include('DatabaseConnection.php');
+include('../DatabaseConnection.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 

@@ -3,7 +3,7 @@ class DatabaseConnection {
     private $conn;
 
     public function __construct() {
-        $this->conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+        $this->conn = new mysqli('localhost', 'root', '', 'ics_e');
         if ($this->conn->connect_error) {
             die("<h1>Database connection failed: " . $this->conn->connect_error . "</h1>");
         }

@@ -16,7 +16,7 @@
                             <h4>Register</h4>
                         </div>
                         <div class="card-body">
-                            <form method="post" action="../app.php">
+                            <form method="post" action="../ICSE/app.php">
                                 <div class="mb-3">
                                     <label for="fname">First Name</label>
                                     <input type="text" name="fname" class="form-control" required>
@@ -29,6 +29,23 @@
                                     <label for="user_name">User Name</label>
                                     <input type="text" name="user_name" class="form-control" required>
                                 </div>
+                                <div class="mb-3">
+    <label for="gender">Gender</label>
+    <select name="genderId" class="form-control">
+        <option value="0">Select Gender</option>
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+    </select>
+</div>
+<div class="mb-3">
+    <label for="role">Role</label>
+    <select name="roleId" class="form-control">
+        <option value="0">Select Role</option>
+        <option value="1">Admin</option>
+        <option value="2">User</option>
+    </select>
+</div>
+
                                 <div class="mb-3">
                                     <label for="password">Password</label>
                                     <input type="password" name="password" class="form-control" required>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript</title>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+    </head>
+    <!--ways to display a javascript document .... document.write(); or window.alert(); or document.getElementById();-->
+
+    <body>
+        <p>Hello World</p>
+
+        <button onclick = "document.getElementById('MyImg').src = '../images/bulb.webp'">Turn On
+        </button>
+        <img src = "../images/bulb.webp" alt="" border = "0" id="MyImg" width="50px" height="">
+
+        <button onclick = "document.getElementById('MyImg').src = '../images/bulb2.webp'">Turn Off
+        </button>
+        <img src = "../images/bulb2.png" alt="" border = "0" id="MyImg" width="50px" height="">
+
+        <p id="demo"></p>
+
+       
+       <!--possibility 2-->
+        <script>
+            document.write(5 + 9);
+        </script>
+        <br>
+        <button onclick= 'document.write(24 + 26)'>Compute</button>
+        <br>
+        <br>
+        <!--Deleting message on the screen-->
+        <a href = "#" onclick='return confirm("Are you sure?");'> Delete</a><br>
+        
+        <!--window.alert(''); message display of javascript-->
+        <script>
+            window.alert('Connected Successfully');
+        </script>
+
+        <!--Possibility 6-->
+        <script>
+            console.log(9 *5);
+        </script>
+        <a href = "#" onclick='MyFunc()'> Click Here</a>
+        <p id="tictac"></p>
+
+        <script>
+            document.getElementById("demo").innerHTML = "Hello JS";
+            document.getElementById("demo").style.fontSize = "35px";
+            document.getElementById("demo").style.display = "none";
+        </script>
+        <script src="../ICSE/Javascript/script.js"></script>
+         
+        <!--Variables in javascript
+        it should be concutinated with a + and not a .-->
+        <script>
+            var age = 13;
+            let continent = 'Africa';
+            const course = 'ICS';
+            document.write('I am ' + age + ' I live in ' + continent + ' and I study ' +  course + '.');
+
+        </script>
+    </body>
+</html>

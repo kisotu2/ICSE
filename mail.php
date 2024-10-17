@@ -1,36 +1,58 @@
 <?php
-require 'PHPMailer/PHPMailerAutoload.php';
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-$mail = new PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-//$mail->SMTPDebug = 3;                               // Enable verbose debug output
+class SendMail {
+    public function __construct($mailMsg) {
+        // Load Composer's autoloader
+        require 'plugins/PHPMailer/vendor/autoload.php';
+        
+        // Create an instance; passing `true` enables exceptions
+        $mail = new PHPMailer(true);
 
-$mail->isSMTP();                                      // Set mailer to use SMTP
-$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-$mail->SMTPAuth = true;                               // Enable SMTP authentication
-$mail->Username = 'kisotusamuel1@gmail.com';                 // SMTP username
-$mail->Password = 'grcfyjpflbfcqpsd';                           // SMTP password
-$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 587;                                    // TCP port to connect to
-
-$mail->setFrom('kisotusamuel1@gmail.com', 'Samwel Kisotu');
-$mail->addAddress('kisotu.samuel@strathmore.edu', ' Lemayian');     // Add a recipient
-//$mail->addAddress('ellen@example.com');               // Name is optional
-//$mail->addReplyTo('info@example.com', 'Information');
-//$mail->addCC('cc@example.com');
-//$mail->addBCC('bcc@example.com');
-
-//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-$mail->isHTML(true);                                  // Set email format to HTML
-
-$mail->Subject = 'Here is the subject';
-$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-if(!$mail->send()) {
-    echo 'Message could not be sent.';
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
-} else {
-    echo 'Message has been sent';
+        try {
+            // Server settings
+            $mail->SMTPDebug = 0;                      // Enable verbose debug output
+            $mail->isSMTP();                           // Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';      // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                  // Enable SMTP authentication
+            $mail->Username   = getenv('kisotusamuel1@gmail.com');  // SMTP username (use env variables for security)
+            $mail->Password   = getenv('grcfyjpflbfcqpsd');  // SMTP password (use env variables for security)
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Enable implicit TLS encryption
+            $mail->Port       = 465;                   // TCP port to connect to
+            
+            // Recipients
+            $mail->setFrom('kisotusamuel1@gmail.com', 'Samuel Kisotu');
+            $mail->addAddress($mailMsg['to'], $mailMsg['name']);  // Recipient's email and name
+            
+            // Content
+            $mail->isHTML(true);                       // Set email format to HTML
+            $mail->Subject = $mailMsg['subject'];
+            $mail->Body    = nl2br($mailMsg['message']);
+            
+            // Send the email
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+        }
+    }
 }
+?>
+
+<!-- Example usage -->
+<?php
+$mailData = [
+    'to' => 'kisotu.samwel@strathmore.edu',  // Recipient's email
+    'name' => 'Lemayian',                   // Recipient's name
+    'subject' => 'Test Email Subject',
+    'message' => 'This is a test message.'
+];
+
+$sendMail = new SendMail($mailData);
+?>

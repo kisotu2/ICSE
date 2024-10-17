@@ -58,15 +58,26 @@
             let continent = 'Africa';
             const course = 'ICS';
             document.write('I am ' + age + ' I live in ' + continent + ' and I study ' +  course + '.');
+           
 
         </script>
 
         <script>
             const username = prompt('What is your Username');
-            if(username.length >6)
-            alert(username + ' has the correct length');
-            else
-            alert(username + ' must have more than 6 characters');
+            const message = `Hello ${username} <br> I am happy to introduce you to JS.`;
+            document.write(message);
+            
+            //if(username.length >6)
+            //alert(username + ' has the correct length');
+           // else
+            //alert(username + ' must have more than 6 characters');
+        </script>
+
+        <script>
+            function calcSum(r,t){
+                return r*t;
+            }
+            document.write(calcSum(4,56));
         </script>
     </body>
 </html>

@@ -7,7 +7,7 @@
     </head>
     <!--ways to display a javascript document .... document.write(); or window.alert(); or document.getElementById();-->
 
-    <body>
+    <body >
         <p>Hello World</p>
 
         <button onclick = "document.getElementById('MyImg').src = '../images/bulb.webp'">Turn On
@@ -63,9 +63,9 @@
         </script>
 
         <script>
-            const username = prompt('What is your Username');
-            const message = `Hello ${username} <br> I am happy to introduce you to JS.`;
-            document.write(message);
+            //const username = prompt('What is your Username');
+            //const message = `Hello ${username} <br> I am happy to introduce you to JS.`;
+            //document.write(message);
             
             //if(username.length >6)
             //alert(username + ' has the correct length');
@@ -79,5 +79,28 @@
             }
             document.write(calcSum(4,56));
         </script>
+
+        <script>
+            function startTime(){
+                var today = new Date();
+                var h=today.getHours();
+                var m=today.getMinutes();
+                var s=today.getSeconds();
+// adding zero to numbers below 10
+                h=addZero(h);
+                m=addZero(m);
+                s=addZero(s);
+
+                document.getElementById('tmr').innerHTML = h + ":" + m +":" + s;
+                t=setTimeout('startTime()',500);
+            }
+            function addZero(z){
+                if(z<10){
+                    z = "0" + z;
+                    return z;
+                }
+            }
+        </script>s
+        <p id = "tmr"></p>
     </body>
 </html>

@@ -1,59 +1,65 @@
+<?php
+require_once 'RegisterController.php';
+
+$message = '';
+$userManagement = new UserManagement('localhost', 'user_management', 'root', '');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+    if (empty($username) || empty($email) || empty($password)) {
+        $message = 'All fields are required.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $message = 'Invalid email format.';
+    } elseif (strlen($password) < 8) {
+        $message = 'Password must be at least 8 characters long.';
+    } else {
+        try {
+            $userId = $userManagement->registerUser($username, $email, $password);
+            $message = "User registered successfully. You can now <a href='login.php'>log in</a>.";
+        } catch (PDOException $e) {
+            $message = 'Registration failed: ' . $e->getMessage();
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../icse/styles.css">
-    <title>Registration Form</title>
+    <title>Register - Novel Enthusiasts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-   
-
-    <div class="form-container">
-        <form method="post" action="authentication.php">
-            <div class="mb-3">
-                <label for="fname">First Name</label>
-                <input type="text" name="fname" class="form-control" required>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Register Here</h2>
+        <?php if ($message): ?>
+            <div class="alert alert-info"><?php echo $message; ?></div>
+        <?php endif; ?>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="post" action="">
+                <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+                <p class="mt-3">Already have an account? <a href="login.php">Login here</a></p>
             </div>
-            <div class="mb-3">
-                <label for="email">Email Address</label>
-                <input type="email" name="email" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="user_name">User Name</label>
-                <input type="text" name="user_name" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="gender">Gender</label>
-                <select name="genderId" class="form-control" required>
-                    <option value="0">Select Gender</option>
-                    <option value="1">Male</option>
-                    <option value="2">Female</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="role">Role</label>
-                <select name="roleId" class="form-control" required>
-                    <option value="0">Select Role</option>
-                    <option value="1">Admin</option>
-                    <option value="2">User</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="password">Password</label>
-                <input type="password" name="password" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="confirm_password">Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <button type="submit" name="register" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
+        </div>
     </div>
-    <?php include 'navbar.php'; ?>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -102,5 +102,19 @@
             }
         </script>s
         <p id = "tmr"></p>
+
+        <script>
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','another_file.html');
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){
+                    document.getElementById('ajx').innerHTML = xhr.responseText;
+                }
+            };
+            function sendAjax(){
+                xhr.send();
+                document.getElementById('load').style.display = 'none';
+            }
+        </script>
     </body>
 </html>

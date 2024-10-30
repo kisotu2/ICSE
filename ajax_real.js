@@ -2,7 +2,7 @@ $(document).ready(function(){
     load_data();
     function load_data(query){
         $.ajax({
-            url : "process.php",
+            url : "process_js.php",
             method : "POST",
             data : {query:query},
             success : function

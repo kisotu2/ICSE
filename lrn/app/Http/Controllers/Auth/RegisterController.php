@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -68,5 +69,16 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $validToken = rand(10,100.."2022");
+        $get_token = new Verifytoken();
+        $get_token->token = $validToken;
+        $get_token->email = $data['email'];
+        $get_token->save();
+        $get_user_email = $data['email'];
+        $get_user_name = $data['name'];
+        Mail :: to($data['email'])->send (new WelcomeMail($get_user_email,$validToken,$get_user_name));
+
+        return $user();
     }
 }

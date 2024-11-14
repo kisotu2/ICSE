@@ -1,64 +1,87 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>L.Blessings</title>
 
-        <title>Laravel</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- Styles / Scripts -->
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+    @endif
 
-        <!-- Styles / Scripts -->
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @else
-         
-        @endif
-    </head>
-    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-        <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-          
-            <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
-                <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                    <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-                        
-                        @if (Route::has('login'))
-                            <nav class="-mx-3 flex flex-1 justify-end">
-                                @auth
-                                    <a
-                                        href="{{ url('/dashboard') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Dashboard
-                                    </a>
-                                @else
-                                    <a
-                                        href="{{ route('login') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Log in
-                                    </a>
+    <!-- Custom Styles -->
+    <style>
+        /* Gradient Background */
+        body {
+            background: linear-gradient(135deg, #ff2d20, #000000);
+            color: #ffffff;
+        }
+        
+        /* Card Styling */
+        .card {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Navigation Links */
+        a.nav-link {
+            color: #ffffff;
+            transition: color 0.2s ease-in-out;
+        }
+        a.nav-link:hover {
+            color: #ff2d20;
+        }
+        
+        /* Header Style */
+        header {
+            margin-top: 2rem;
+            text-align: center;
+        }
 
-                                    @if (Route::has('register'))
-                                        <a
-                                            href="{{ route('register') }}"
-                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                        >
-                                            Register
-                                        </a>
-                                    @endif
-                                @endauth
-                            </nav>
+        /* Footer */
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <div class="min-h-screen flex flex-col items-center justify-center">
+        <div class="card w-full max-w-2xl px-6 py-8 lg:max-w-4xl">
+            <header class="py-6">
+                <h1 class="text-4xl font-bold text-white">Welcome to L.Tec</h1>
+                <p class="mt-2 text-gray-200">Another level of Technology.</p>
+            </header>
+
+            <!-- Navigation -->
+            @if (Route::has('login'))
+                <nav class="flex justify-center space-x-4 mt-6">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="nav-link text-lg px-4 py-2 rounded-md bg-[#ff2d20] hover:bg-[#d1231c] transition">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="nav-link text-lg px-4 py-2 rounded-md bg-[#ff2d20] hover:bg-[#d1231c] transition">Log in</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="nav-link text-lg px-4 py-2 rounded-md bg-[#ff2d20] hover:bg-[#d1231c] transition">Register</a>
                         @endif
-                    </header>
-
-          
-
-
-                </div>
-            </div>
+                    @endauth
+                </nav>
+            @endif
         </div>
-    </body>
+
+        <footer>
+            <p>&copy; {{ date('Y') }} L.Blessings</p>
+        </footer>
+    </div>
+</body>
 </html>

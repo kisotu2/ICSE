@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <p1>Home</p1>
+        <h1>Dashboard</h1>
       
         <script src="" async defer></script>
     </body>

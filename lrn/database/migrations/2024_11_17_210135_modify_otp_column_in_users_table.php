@@ -27,7 +27,7 @@ class ModifyOtpColumnInUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            // Revert the otp column size back to the original size, e.g., 100
+            // Revert the otp column size back to the original size
             $table->string('otp', 100)->change();
         });
     }
